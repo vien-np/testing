@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+      <style>
+		        #tb tr:nth-child(odd) { background: #eee; } 
+          /* 
+          #messages { list-style-type: none; margin: 0; padding: 0; }
+      				#messages li { padding: 5px 10px; }
+      				#messages li:nth-child(odd) { background: #eee; } */
+      				
+/*       				#ss  li { padding: 5px 10px; } */
+/* 										#ss 	li:nth-child(odd) { background: #eee; } */
+          
+      </style>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>  
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <link rel="stylesheet" href="assets/home/bootstrap/css/bootstrap.css">
+        <link rel="stylesheet" href="assets/home/font-awesome/css/font-awesome.css">
+        <link rel="stylesheet" href="assets/home/css/style.css">
+        <link href='http://fonts.googleapis.com/css?family=Cinzel' rel='stylesheet' type='text/css'>
+        <script type="text/javascript" src="assets/home/js/jquery-1.11.2.min.js"></script>  
+        <script type="text/javascript" src="assets/home/bootstrap/js/bootstrap.js"></script>
+
+    </head>
+    <body>
+<!--     <ul id="messages"></ul> -->
+<!--      <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script> -->
+<!--     <script> -->
+<!--  			  var socket = io(); -->
+<!--  			  var macAdrsArr = []; -->
+<!--  			  socket.on('data', function(msg){ -->
+<!--  					var mac = 	msg.macAddress; -->
+				
+<!--  					if( macAdrsArr.length == 0){ -->
+<!--  						$('#ss').append($('<li>').text(msg.macAddress)); -->
+<!--  						macAdrsArr.push(msg.macAddress); -->
+<!--  					} -->
+<!--  					for(var i = 0; i< macAdrsArr.length; i++){ -->
+<!--  							if(macAdrsArr[i] == mac){ -->
+<!--  									return; -->
+<!--  							} -->
+<!--  					} -->
+<!--  					macAdrsArr.push(msg.macAddress); -->
+<!--  					$('#ss').append($('<li>').text(msg.macAddress)); -->
+<!--  			  });		 -->
+<!-- 				</script> -->
+    
+    
+    
+   
+    <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+     <script>
+      var socket = io();
+	 			 var macAdrsArr1 = [];
+	 		  var mac1 = null;
+      socket.on('data', function(msg){
+    	 mac1 = 	msg.macAddress;
+    		
+    		
+    		if( macAdrsArr1.length == 0){
+    			var tbody=$('#tb').children('tbody');
+    	        var table = tbody.length ? tbody : $('#tb');
+    	        table.append(
+    	                '<tr>'
+    	                + '<td>' + (macAdrsArr1.length+1)+ '</td>'
+    	                + '<td>' + msg.macAddress + '</td>'
+    	                + '<td>' + msg.sensorType + '</td>'
+    	                + '<td>' + msg.ip + '</td>'
+    	                + '<td>' + msg.user + '</td>'
+    	                + '<td>' + msg.group + '</td>'
+    	                + '<td>' + msg.tenant + '</td>'
+    	                + '<td>' + msg.gateway + '</td>'
+    	                + '<td>' + msg.value + '</td>'
+    	                +'</tr>');
+							macAdrsArr1.push(msg.macAddress);
+						}
+						for(var i = 0; i< macAdrsArr1.length; i++){
+							if(macAdrsArr1[i] == mac1){
+								var myTable = document.getElementById('tb');
+								myTable.rows[i+1].cells[8].innerHTML =  msg.value;
+										return;
+									}
+							}
+						var tbody=$('#tb').children('tbody');
+				        var table = tbody.length ? tbody : $('#tb');
+				        table.append(
+				                '<tr>'
+				                + '<td>' + (macAdrsArr1.length+1) +'</td>'
+				                + '<td>' + msg.macAddress + '</td>'
+				                + '<td>' + msg.sensorType + '</td>'
+				                + '<td>' + msg.ip + '</td>'
+				                + '<td>' + msg.user + '</td>'
+				                + '<td>' + msg.group + '</td>'
+				                + '<td>' + msg.tenant + '</td>'
+				                + '<td>' + msg.gateway + '</td>'
+				                + '<td>' + msg.value + '</td>'
+				                +'</tr>');
+						macAdrsArr1.push(msg.macAddress);
+      });
+    </script>
+        <div class="container">
+            <div class="row">
+                <h1 class="text-center">Sensor simulation dashboard</h1>
+            </div>
+            <div class="row">
+                <form action="createSensor" method="POST">
+                    <div class="form-group">
+                        <div class="col-sm-offset-3 col-sm-2">
+                            <input type="text" name="sensorQuantity"  id="number"  class="form-control"  placeholder="Enter number">
+                        </div>
+                        <div class="col-sm-2">
+                           <!--  <input type="text" name="brokerAddress" id="ipAddress"  class="form-control"  placeholder="Broker address"> -->
+                            <select name="brokerAddress" class="selectpicker" style="height:33px;">
+                             			<option>tcp://172.16.0.115:1881</option>
+                              		<option>tcp://172.16.0.115:1882</option>
+                                <option>tcp://172.16.0.115:1883</option>
+                                <option>tcp://172.16.0.115:1884</option>
+                                <option>tcp://172.16.0.116:1883</option>
+                                <option>tcp://172.16.0.117:1883</option>
+                                <option>tcp://172.16.0.118:1883</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-1">
+                            <select name="sensorType" class="selectpicker" style="height:33px;">
+                                <option>H2S</option>
+                                <option>PIR</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-1">
+                            <input type="submit" value="create" style="height:33px;">
+                        </div>
+                        <div class="col-sm-2">
+                            <input type="button" value="delete all" style="height:33px;">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            
+      					<!-- 	<ul id="ss"> 
+                <li class="parent">
+                    <div class="sensor">
+                        <div class="sensor text-center width-40">5</div><br>
+                        <div class="sensor sen-button text-center width-40">on</div>
+                    </div>
+                    <div style="clear:both"></div>
+                    <div class="text-center">172.168.0.1</div>
+                </li>
+            </ul> -->
+
+            </br></br>
+            <table style="width:85%; text-align: left; margin-bottom: 20px" id="tb">
+										    <tr>
+										    		<th>No.</th>
+												    <th>MacAddress</th>
+												    <th>Type</th>
+												    <th>IP</th>
+										      <th>User</th>
+										      <th>Group</th>
+										      <th>Tenant</th>
+										   	  <th>Gateway</th>
+										      <th>Value</th>
+										    </tr>
+										  </table>
+            
+            
+            
+        </div>
+    </body>
+    <script type="text/javascript">
+        $('.sen-button').click(function (argument) {
+            if('on' == $(this).text()){
+                $(this).text('off');
+                $(this).css("background-color", "#FF0000");
+            }else{
+                $(this).text('on');
+                $(this).css("background-color", "#00FFFF");
+            }
+        });
+    </script>
+</html>

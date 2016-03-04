@@ -1,0 +1,9 @@
+{
+  "gateway": "tcp://172.16.0.69:1883",
+  "username": "admin",
+  "password": "admin",
+  "time": 5000,
+  "ip": "172.11.0.12",
+  "type": "Gas sensor",
+  "title": "h2s"
+}

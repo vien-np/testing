@@ -1,0 +1,10 @@
+ {
+	"gateway": "tcp://172.16.0.117:1883",
+	"amqCloud": "tcp://172.16.0.115:1885",
+	"username": "admin",
+	"password": "admin",
+	"user" : "vnp",
+	"group" :"workplace_1",
+    "tenant": "free-m"  	
+ }
+            

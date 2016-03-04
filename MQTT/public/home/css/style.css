@@ -1,0 +1,23 @@
+.sensor{
+	float:left; 
+	margin-left:20px; 
+	list-style-type: none; 
+	border: #000 1px solid;
+	margin: 10px;
+	padding: 10px;
+	border-radius: 6px;
+}
+
+.sen-button{
+	cursor:pointer;
+	background-color: #00FFFF;
+}
+
+.width-40{
+	width: 40px;
+}
+
+.parent{
+	list-style-type: none; 
+	float:left;
+}
