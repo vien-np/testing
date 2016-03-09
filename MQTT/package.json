@@ -1,12 +1,21 @@
 {
-  "name": "Subscribe",
+  "name": "simulation",
   "version": "1.0.0",
-  "private": true,
+  "description": "Node.js sample app for OpenShift origin",
+  "main": "app.js",
+  "dependencies":{
+	 "express": "*",
+	 "ejs": "*" 
+  },
+  "engine": {
+    "node": "*",
+    "npm": "*"
+  },
   "scripts": {
     "start": "node app.js"
   },
-  "main": "app.js",
-  dependencies{
-	npm install 
- }
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vien-np/testing.git"
+  }
 }

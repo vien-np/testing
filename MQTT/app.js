@@ -75,7 +75,7 @@ Server.prototype.startServer = function() {
 	require("./gateway.js").subscribe("tcp://172.16.0.115:1883");
 	require("./gateway.js").subscribe("tcp://172.16.0.115:1884");
 	http.listen(server_port,server_ip_address, function() {
-		console.log( "Listening on " + server_ip_address + ", server_port " + port );
+		console.log('Server running on ' + server_ip_address + ':' + server_port );
 	});
 	//recieve data from a topin in ActiveMQ cloud broker then emit to webpage
 	dataEmit("tcp://172.16.0.69:1883");
