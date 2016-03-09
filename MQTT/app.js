@@ -63,6 +63,10 @@ Server.prototype.configureExpress = function() {
 	var rest_router = new Controller(router);
 	self.startServer();
 };
+
+var server_port = process.env.OPENSHIFT_NODEJS_PORT || 8080;
+var server_ip_address = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
+
 //Start server at port 3100
 Server.prototype.startServer = function() {
 	//run 4 gateways as there are 4 gateways simulation, each gateway charge for an activemq broker
@@ -70,8 +74,8 @@ Server.prototype.startServer = function() {
 	require("./gateway.js").subscribe("tcp://172.16.0.115:1882");
 	require("./gateway.js").subscribe("tcp://172.16.0.115:1883");
 	require("./gateway.js").subscribe("tcp://172.16.0.115:1884");
-	http.listen(3100, function() {
-		console.log("All right ! I am alive at Port 3100.");
+	http.listen(server_port,server_ip_address, function() {
+		console.log( "Listening on " + server_ip_address + ", server_port " + port );
 	});
 	//recieve data from a topin in ActiveMQ cloud broker then emit to webpage
 	dataEmit("tcp://172.16.0.69:1883");
