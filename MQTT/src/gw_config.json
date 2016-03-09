@@ -1,9 +1,0 @@
- {
-	"gateway": "tcp://172.16.0.69:1883",
-	"username": "admin",
-	"password": "admin",
-	"user" : "vnp",
-	"group" :"workplace",
-    "tenant": "free-m"  	
- }
-            
